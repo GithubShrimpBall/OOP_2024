@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+class stack{
+    int size;
+    int* mem;
+    int tos;
+
+    public:
+        stack(int size=4){
+            this->size =size; mem= new int [size];
+            tos=-1;
+        }
+        ~stack() {delete[] mem;}
+        stack& operator << (int n); 
+        stack& operator >>(int& n);
+        bool operator ! ();
+};
+
+stack& stack::operator <<(int n){
+    if(tos<size-1){
+        mem[++tos]=n;
+    }
+    return *this;
+}
+
+stack& stack::operator >>(int& n){
+    if(tos>=0){
+        n=mem[tos--];
+    }
+    return *this;
+}
+bool stack::operator !(){
+    if(tos==-1){return true;}
+    else{return false;}
+}
+
+int main(){
+    stack s(10);
+    s << 1 << 2 << 3 << 4 << 5;
+    while(true){
+        if(!s) break;
+        int x;
+        s >> x;
+        cout << x << ' ';
+    }
+
+    cout << endl;
+}
