@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Circle{
+    int radius;
+    public:
+        Circle(int radius=0){this->radius=radius;}
+        int getRadius(){return radius;}
+        void setRadius(int radius){this->radius=radius;}
+        double getArea(){ return 3.14*radius*radius;}
+};
+class NamedCircle:public Circle{
+    string Name;
+    public:
+    NamedCircle(int radius=0,string Name="Noname"):Circle(radius){
+        this->Name=Name;
+    }
+    void set(int r, string name){
+        setRadius(r);
+        this->Name=name;
+    }
+    string getName(){return Name;}
+
+    void show(){
+        cout << "반지름이 " << this->getRadius() << "인 " << Name << endl; 
+    }
+};
+//biggest 함수를 클래스 내부가 아닌, 전역 함수로 구현해야 접근할 수 있음에 유의해야 한다
+    string biggest(NamedCircle c[], int r){
+        if(r<=0) return "배열의 크기가 1보다 커야 합니다.";
+        int big=0;
+        for(int i=0; i<r; i++){
+            if(c[big].getRadius()<c[i].getRadius()) {big=i;}
+        }
+        return c[big].getName();
+    }
+
+int main(){
+    NamedCircle c[5];
+    cout << "5개의 정수 반지름과 원의 이름을 입력하세요" << endl;
+    for(int i=0; i<5; i++){
+        int r;
+        string name;
+        cout << i+1 << ">> ";
+        cin >> r;
+        getline(cin, name);
+        if(r<=0){
+            cout<< "다시 입력하세요" << endl;
+            i--;
+            continue;
+        }
+        c[i].set(r,name);
+    }
+    cout <<"가장 면적이 큰 피자는 " << biggest(c,5) << "입니다" << endl;
+}
