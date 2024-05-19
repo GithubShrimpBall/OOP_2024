@@ -1,0 +1,105 @@
+#include <iostream>
+using namespace std;
+
+
+class BaseArray{
+    int capacity;
+    int* mem;
+    protected:
+    BaseArray(int capacity = 100);
+    ~BaseArray();
+    void put(int index, int val);
+    int get(int index);
+    int getCapacity();
+    void putCapacity(int newCap);
+    int* getMem(void);
+    void putMem(int* start);
+    void deleteMem();
+};
+
+BaseArray::BaseArray(int capacity){
+    this->capacity = capacity;
+    mem = new int[capacity];
+}
+BaseArray::~BaseArray(){
+    delete[] mem;
+}
+void BaseArray::put(int index, int val){
+    mem[index] = val;
+}
+int BaseArray::get(int index){
+    return mem[index];
+}
+int BaseArray::getCapacity(){
+    return capacity;
+}
+void BaseArray::putCapacity(int newCap){
+    int* newMem = new int[newCap];
+    int n = capacity < newCap ? capacity : newCap;
+    for(int i=0; i<n; i++){
+        newMem[i] = mem[i];
+    }
+    delete[] mem;
+    mem = newMem;
+    capacity = newCap;
+}
+int* BaseArray::getMem(void){
+    return mem;
+}
+void BaseArray::putMem(int* start){
+    delete[] mem;
+    mem = start;
+}
+void BaseArray::deleteMem(){
+    delete[] mem;
+}
+
+class MyStack: public BaseArray{
+    int tos; //초기값 -1
+    public:
+        MyStack(int capacity);
+        void push(int n);
+        int pop();
+        int capacity();
+        int length();
+};
+
+MyStack::MyStack(int capacity):BaseArray(capacity){
+    tos = -1;
+
+}
+void MyStack::push(int n){
+    if(tos == getCapacity()-1){
+        putCapacity(getCapacity()*2);
+    }
+    put(++tos, n);
+}
+int MyStack::pop(){
+    if(tos == 0.25*getCapacity()){
+        putCapacity(getCapacity()/2);
+    }
+    return get(tos--);
+}
+int MyStack::capacity(){
+    return getCapacity();
+}
+int MyStack::length(){
+    return tos+1;
+}
+
+int main(){
+    MyStack mStack(1);
+    int n;
+    cout << "스택에 삽입할 5개의 정수를 입력하라>> ";
+    for(int i=0; i<5; i++){
+        cin >> n;
+        mStack.push(n);
+    }
+    cout << "스택 용량: " << mStack.capacity() << " 스택 크기: " << mStack.length() << endl;
+    cout << " 스택의 모든 원소를 팝하여 출력한다>> ";
+    while (mStack.length() > 0){
+        int k = mStack.pop();
+        cout << k << ' ';
+    }
+    cout << "\n스택 용량:" << mStack.capacity() << ", 스택 크기:" << mStack.length() << endl;
+}
