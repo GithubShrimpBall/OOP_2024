@@ -1,0 +1,23 @@
+#include <iostream>
+#include <list>
+using namespace std;
+
+int main(void){
+    int i=0;
+    list <int> MyList(5,20);
+    list <int> ::iterator it;
+
+    for(it=MyList.begin(); it != MyList.end(); ++it){
+        *it = *it *(i+1);
+        cout << ' ' << *it;
+        i++;
+    }
+    //list 함수는 i 를 통해서 움직이는게 아니라 iterator를 사용한다.
+    //list는 어떤 방식으로 작동하는지 공부할 필요가 있닻                                                                                                                                                   
+
+    cout << endl;
+    cout << MyList.front() << endl;
+    cout << * MyList.begin() << endl;
+    cout << MyList.back() << endl;
+    cout << *(--MyList.end()) << endl;
+    }
