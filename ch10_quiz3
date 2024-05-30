@@ -1,0 +1,48 @@
+/*#include<iostream>
+using namespace std;
+
+template <typename T>
+class Point{
+    private:
+        T x, y;
+    public:
+        Point(T a=0, T b=0):x(a), y(b){ }
+        template <typename T>
+        friend ostream& operator<<(ostream& out, Point<T>& Po);
+};
+template <typename T>
+ostream& operator<<(ostream& out, Point<T>& Po){
+    out << "(" << Po.x << "," << Po.y << ")";
+    return out;
+}
+
+int main(){
+    Point<int> a(3,5);
+    cout << a << endl;
+}
+*/
+#include<iostream>
+using namespace std;
+
+template <typename T>
+class Point {
+private:
+    T x, y;
+public:
+    Point(T a = 0, T b = 0) : x(a), y(b) { }
+
+    template <typename U>
+    friend ostream& operator<<(ostream& out, const Point<U>& Po);
+};
+
+template <typename T>
+ostream& operator<<(ostream& out, const Point<T>& Po) {
+    out << "(" << Po.x << "," << Po.y << ")";
+    return out;
+}
+
+int main() {
+    Point<int> a(3, 5);
+    cout << a << endl;
+}
+//여기서 오류가 발생한 영역은 위에서 template 타입이랑, ostream 함수에서의 template 타입이 같아서 충돌이 발생한 것으로 보인다.
