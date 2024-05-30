@@ -9,14 +9,20 @@ int main(void){
     // 아 >> 로 하게 되면 shift 연산자로 잘못 파싱되는 문제가 발생함. 고로 반드시 > > 로 표기해야 의도대로 됨!!
     int iArray[]={10, 20, 30};
     string strArray[]={"Seoul", "Busan", "Junju"};
+    
+
     for(int i=0; i<size; i++){
         vPair.push_back(make_pair(iArray[i], strArray[i]));
     }
+    //결국은 이 위의 블럭이 이 문제에서 중요한 부분이다. make_pair 를 이용해서 pair를 만들고, 이를 push_back으로 넣어주는 것임.
+    //연계해서 어떻게 출력하는지도 보면 좋을 것!!
+
+
     for(int i=0; i<size; i++){
         cout<<"vPair[" << i << "]= " << "(" << vPair[i].first << " " << vPair[i].second << " )" << endl;
     }
 }
 
 /*
-pair 클래스와 관련해서 학습이 필요하며, 완성된 코드는 5/27 11:30분경 사진에 저장되어 있음
+의도된 출력은 vPair[0]=(10 seoul) ... 을 출력하는 것이다.
 */
