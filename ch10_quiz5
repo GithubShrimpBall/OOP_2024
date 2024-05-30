@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main(void){
+    int size =3;
+    vector<pair<int, string> > vPair; //일단 여기서 괄호를 > > 로 하지 않고 >>로 표기해서 오류가 발생했음
+    // 아 >> 로 하게 되면 shift 연산자로 잘못 파싱되는 문제가 발생함. 고로 반드시 > > 로 표기해야 의도대로 됨!!
+    int iArray[]={10, 20, 30};
+    string strArray[]={"Seoul", "Busan", "Junju"};
+    for(int i=0; i<size; i++){
+        vPair.push_back(make_pair(iArray[i], strArray[i]));
+    }
+    for(int i=0; i<size; i++){
+        cout<<"vPair[" << i << "]= " << "(" << vPair[i].first << " " << vPair[i].second << " )" << endl;
+    }
+}
+
+/*
+pair 클래스와 관련해서 학습이 필요하며, 완성된 코드는 5/27 11:30분경 사진에 저장되어 있음
+*/
