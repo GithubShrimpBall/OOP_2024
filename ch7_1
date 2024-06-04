@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+/*
+prac4를 외부 함수로 구현해보자
+*/
+class Power{
+    int kick;
+    int punch;
+
+    public:
+        Power(int kick=0, int punch=0){
+            this->kick =kick; this->punch=punch;
+        }
+        void show();
+        friend Power operator+= (Power& op1, Power op2);
+};
+
+void Power::show(){
+    cout << "kick=" << kick << ',' << "punch=" << punch << endl;
+}
+
+Power operator+=(Power &op1, Power op2){
+    op1.kick = op1.kick+op2.kick;
+    op1.punch=op1.punch+op2.punch;
+    return op1;
+}
+
+int main(){
+    Power a(3,5), b(4,6), c;
+    a.show();
+    b.show();
+    c=a+=b;
+    a.show();
+    c.show();
+}
+
+/*
+왜 참조를 이용해서 구현해야 외부함수로 구현이 되는지 정리해야 할 것.
+그리고 외부 함수로 구현이 되었기에, 매개변수가 1개에서 2개로 늘어난 변화 점을 파악해야 한다.
+*/
