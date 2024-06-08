@@ -1,0 +1,20 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Converter{
+    protected:
+        double ratio;
+        virtual double convert(double src)=0;
+        virtual string getsSourceString()=0;
+        virtual string getDestString()=0;
+    public:
+        Converter(double ratio){this->ratio=ratio;}
+        virtual void run()=0;
+};
+
+
+int main(){
+    Converter * wd = new wonToDollar(1170);
+    wd->run();
+}
