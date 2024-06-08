@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+class Calculator{
+    protected:
+    virtual void input()=0;
+    virtual int calc(int a, int b)=0;
+    public:
+        virtual void run()=0;
+};
+class Adder:public calculator{
+    protected:
+    int a=0, b=0;
+    void input();{
+        cout << "더할 정수 2개를 입력하시오>>";
+        cin >> a >> b;
+    }
+    int calc(int a, int b){
+        return a+b;
+    }
+    public:
+    virtual void run(){
+        input();
+        cout << "계산된 값은 " << calc(a,b) << endl;
+    }
+};
+
+//의 형식으로 subtract도 완성하면 된다. 찍은 사진 확인
+int main(){
+    calculator =adder=new Adder();
+    calculator =subtractor=new Subtractor();
+    adder->run();
+    subtractor->run();
+}
+
+// 일단 이것도 9장에 해당하는 코드 같으니 참고
