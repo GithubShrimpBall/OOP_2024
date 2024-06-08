@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Converter{
+    protected:
+        double ratio;
+        virtual double convert(double src)=0;
+        virtual string getSourceString()=0;
+        virtual string getDestString()=0;
+    public:
+        Converter(double ratio){this->ratio=ratio;}
+};
+    class wonToDollar:public Converter{
+        public:
+            wonToDollar(double ratio):Converter(ratio){}
+            double convert(double src){
+                return src/ratio;
+            }
+            string getSourceString(){
+                return "원";
+            }
+            string getDestString(){
+                return "달러";
+            }
+            void run(){
+                double src;
+                cout << "원을 입력하세요>>";
+                cin >> src;
+                cout << src << getSourceString() << "는 " << convert(src) << getDestString() << "입니다." << endl;
+            }
+    };
+int main(){
+    wonToDollar wd(1170);
+    wd.run();
+}
